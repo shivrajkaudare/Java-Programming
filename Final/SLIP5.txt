@@ -1,0 +1,173 @@
+import java.util.*;
+
+class HuffmanNode implements Comparable<HuffmanNode> {
+    char data;
+    int frequency;
+    HuffmanNode left, right;
+
+    public HuffmanNode(char data, int frequency) {
+        this.data = data;
+        this.frequency = frequency;
+    }
+
+    public HuffmanNode(char data, int frequency, HuffmanNode left, HuffmanNode right) {
+        this.data = data;
+        this.frequency = frequency;
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public int compareTo(HuffmanNode other) {
+        return this.frequency - other.frequency;
+    }
+}
+
+public class HuffmanCoding {
+
+    public static void main(String[] args) {
+        String inputString = "Huffman coding is a greedy algorithm used for lossless data compression.";
+
+        Map<Character, Integer> frequencyMap = buildFrequencyMap(inputString);
+        HuffmanNode root = buildHuffmanTree(frequencyMap);
+
+        Map<Character, String> huffmanCodes = generateHuffmanCodes(root);
+
+        System.out.println("Huffman Codes:");
+        for (Map.Entry<Character, String> entry : huffmanCodes.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        int inputSize = inputString.length();
+        int totalBits = 0;
+        for (char c : inputString.toCharArray()) {
+            totalBits += huffmanCodes.get(c).length();
+        }
+
+        double averageCodeLength = (double) totalBits / inputSize;
+        System.out.println("\nAverage Code Length: " + averageCodeLength + " bits per character");
+    }
+
+    public static Map<Character, Integer> buildFrequencyMap(String input) {
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        for (char c : input.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+        }
+        return frequencyMap;
+    }
+
+    public static HuffmanNode buildHuffmanTree(Map<Character, Integer> frequencyMap) {
+        PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
+        for (Map.Entry<Character, Integer> entry : frequencyMap.entrySet()) {
+            pq.offer(new HuffmanNode(entry.getKey(), entry.getValue()));
+        }
+        while (pq.size() > 1) {
+            HuffmanNode left = pq.poll();
+            HuffmanNode right = pq.poll();
+            pq.offer(new HuffmanNode('\0', left.frequency + right.frequency, left, right));
+        }
+        return pq.poll();
+    }
+
+    public static Map<Character, String> generateHuffmanCodes(HuffmanNode root) {
+        Map<Character, String> huffmanCodes = new HashMap<>();
+        generateHuffmanCodes(root, "", huffmanCodes);
+        return huffmanCodes;
+    }
+
+    private static void generateHuffmanCodes(HuffmanNode node, String code, Map<Character, String> huffmanCodes) {
+        if (node == null) return;
+        if (node.data != '\0') {
+            huffmanCodes.put(node.data, code);
+        }
+        generateHuffmanCodes(node.left, code + "0", huffmanCodes);
+        generateHuffmanCodes(node.right, code + "1", huffmanCodes);
+    }
+}
+
+
+-------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+class Edge implements Comparable<Edge> {
+    int src, dest, weight;
+
+    public Edge(int src, int dest, int weight) {
+        this.src = src;
+        this.dest = dest;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Edge other) {
+        return this.weight - other.weight;
+    }
+}
+
+public class KruskalMST {
+    private int V; // Number of vertices
+    private List<Edge> edges;
+
+    public KruskalMST(int V) {
+        this.V = V;
+        this.edges = new ArrayList<>();
+    }
+
+    public void addEdge(int src, int dest, int weight) {
+        edges.add(new Edge(src, dest, weight));
+    }
+
+    private int find(int[] parent, int i) {
+        if (parent[i] == i)
+            return i;
+        return find(parent, parent[i]);
+    }
+
+    private void union(int[] parent, int x, int y) {
+        int xRoot = find(parent, x);
+        int yRoot = find(parent, y);
+        parent[xRoot] = yRoot;
+    }
+
+    public List<Edge> kruskalMST() {
+        List<Edge> result = new ArrayList<>();
+        Collections.sort(edges);
+
+        int[] parent = new int[V];
+        for (int i = 0; i < V; i++)
+            parent[i] = i;
+
+        int e = 0;
+        int i = 0;
+        while (e < V - 1) {
+            Edge nextEdge = edges.get(i++);
+            int x = find(parent, nextEdge.src);
+            int y = find(parent, nextEdge.dest);
+
+            if (x != y) {
+                result.add(nextEdge);
+                union(parent, x, y);
+                e++;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int V = 4;
+        KruskalMST graph = new KruskalMST(V);
+        graph.addEdge(0, 1, 10);
+        graph.addEdge(0, 2, 6);
+        graph.addEdge(0, 3, 5);
+        graph.addEdge(1, 3, 15);
+        graph.addEdge(2, 3, 4);
+
+        List<Edge> result = graph.kruskalMST();
+        System.out.println("Edges in the Minimum Cost Spanning Tree:");
+        for (Edge edge : result) {
+            System.out.println(edge.src + " - " + edge.dest + ": " + edge.weight);
+        }
+    }
+}
+

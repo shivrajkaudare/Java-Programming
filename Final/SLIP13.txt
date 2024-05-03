@@ -1,0 +1,80 @@
+public class MatrixChainMultiplication {
+
+    public static int matrixChainOrder(int[] p) {
+        int n = p.length - 1;
+        int[][] m = new int[n][n];
+
+        // cost is zero when multiplying one matrix.
+        for (int i = 1; i < n; i++) {
+            m[i][i] = 0;
+        }
+
+        // L is chain length.
+        for (int L = 2; L < n; L++) {
+            for (int i = 1; i <= n - L + 1; i++) {
+                int j = i + L - 1;
+                m[i][j] = Integer.MAX_VALUE;
+                for (int k = i; k <= j - 1; k++) {
+                    int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
+                    if (q < m[i][j]) {
+                        m[i][j] = q;
+                    }
+                }
+            }
+        }
+        return m[1][n - 1];
+    }
+
+    public static void main(String[] args) {
+        int[] p = {10, 20, 30, 40, 30};
+        int minMultiplications = matrixChainOrder(p);
+        System.out.println("Minimum number of multiplications: " + minMultiplications);
+    }
+}
+------------------------------------------------------------------------------------------------
+
+public class OptimalBinarySearchTree {
+
+    public static double optimalBST(double[] keys, double[] freq) {
+        int n = keys.length;
+        double[][] cost = new double[n + 1][n + 1];
+
+        for (int i = 0; i < n; i++) {
+            cost[i][i] = freq[i];
+        }
+
+        for (int length = 2; length <= n; length++) {
+            for (int i = 0; i <= n - length + 1; i++) {
+                int j = i + length - 1;
+                cost[i][j] = Double.MAX_VALUE;
+
+                double sum = getSum(freq, i, j);
+                for (int k = i; k <= j; k++) {
+                    double val = sum + (k > i ? cost[i][k - 1] : 0) + (k < j ? cost[k + 1][j] : 0);
+                    if (val < cost[i][j]) {
+                        cost[i][j] = val;
+                    }
+                }
+            }
+        }
+
+        return cost[0][n - 1];
+    }
+
+    private static double getSum(double[] freq, int i, int j) {
+        double sum = 0;
+        for (int k = i; k <= j; k++) {
+            sum += freq[k];
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        double[] keys = {10, 12, 20};
+        double[] freq = {34, 8, 50};
+
+        double minCost = optimalBST(keys, freq);
+        System.out.println("Minimum cost of optimal BST: " + minCost);
+    }
+}
+

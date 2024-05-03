@@ -1,0 +1,106 @@
+import java.util.*;
+
+class Item {
+    int weight;
+    int value;
+
+    public Item(int weight, int value) {
+        this.weight = weight;
+        this.value = value;
+    }
+}
+
+public class FractionalKnapsack {
+
+    public static double getMaxValue(int capacity, Item[] items) {
+        // Sort items based on value per weight ratio
+        Arrays.sort(items, (a, b) -> Double.compare((double) b.value / b.weight, (double) a.value / a.weight));
+
+        double totalValue = 0;
+        int remainingCapacity = capacity;
+
+        for (Item item : items) {
+            if (item.weight <= remainingCapacity) {
+                // Take the whole item
+                totalValue += item.value;
+                remainingCapacity -= item.weight;
+            } else {
+                // Take a fractional part of the item
+                totalValue += (double) item.value / item.weight * remainingCapacity;
+                break;
+            }
+        }
+
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        int capacity = 50;
+        Item[] items = {
+                new Item(10, 60),
+                new Item(20, 100),
+                new Item(30, 120)
+        };
+
+        double maxValue = getMaxValue(capacity, items);
+        System.out.println("Maximum value obtainable: " + maxValue);
+    }
+}
+
+--------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class TravelingSalesmanNearestNeighbor {
+
+    public static List<Integer> nearestNeighbor(int[][] graph) {
+        int n = graph.length;
+        boolean[] visited = new boolean[n];
+        List<Integer> path = new ArrayList<>();
+        
+        // Start from the first city
+        int current = 0;
+        path.add(current);
+        visited[current] = true;
+
+        for (int i = 0; i < n - 1; i++) {
+            int next = findNearestNeighbor(graph, current, visited);
+            path.add(next);
+            visited[next] = true;
+            current = next;
+        }
+
+        // Return to the starting city
+        path.add(0);
+
+        return path;
+    }
+
+    private static int findNearestNeighbor(int[][] graph, int current, boolean[] visited) {
+        int n = graph.length;
+        int nearestNeighbor = -1;
+        int shortestDistance = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && graph[current][i] < shortestDistance) {
+                nearestNeighbor = i;
+                shortestDistance = graph[current][i];
+            }
+        }
+
+        return nearestNeighbor;
+    }
+
+    public static void main(String[] args) {
+        int[][] graph = {
+            {0, 29, 20, 21},
+            {29, 0, 15, 22},
+            {20, 15, 0, 18},
+            {21, 22, 18, 0}
+        };
+
+        List<Integer> path = nearestNeighbor(graph);
+        System.out.println("Path using Nearest Neighbor algorithm: " + path);
+    }
+}
+

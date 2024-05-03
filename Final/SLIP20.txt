@@ -1,0 +1,149 @@
+public class NQueens {
+    private static final int N = 8; // Change N for different board sizes
+
+    // Function to check if a queen can be placed at the specified position
+    private static boolean isSafe(int[][] board, int row, int col) {
+        int i, j;
+
+        // Check this row on left side
+        for (i = 0; i < col; i++)
+            if (board[row][i] == 1)
+                return false;
+
+        // Check upper diagonal on left side
+        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            if (board[i][j] == 1)
+                return false;
+
+        // Check lower diagonal on left side
+        for (i = row, j = col; j >= 0 && i < N; i++, j--)
+            if (board[i][j] == 1)
+                return false;
+
+        return true;
+    }
+
+    // Recursive function to solve N Queens problem
+    private static boolean solveNQueensUtil(int[][] board, int col) {
+        // If all queens are placed, return true
+        if (col >= N)
+            return true;
+
+        // Try placing this queen in all rows one by one
+        for (int i = 0; i < N; i++) {
+            // Check if the queen can be placed on board[i][col]
+            if (isSafe(board, i, col)) {
+                // Place this queen in board[i][col]
+                board[i][col] = 1;
+
+                // Recur to place rest of the queens
+                if (solveNQueensUtil(board, col + 1))
+                    return true;
+
+                // If placing queen in board[i][col] doesn't lead to a solution then remove the queen from board[i][col]
+                board[i][col] = 0; // BACKTRACK
+            }
+        }
+
+        // If the queen can't be placed in any row in this column col, then return false
+        return false;
+    }
+
+    // Wrapper function to solve N Queens problem
+    public static void solveNQueens() {
+        int[][] board = new int[N][N];
+
+        if (!solveNQueensUtil(board, 0)) {
+            System.out.println("Solution does not exist");
+            return;
+        }
+
+        // Print the solution
+        System.out.println("Solution:");
+        for (int[] row : board) {
+            for (int cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        solveNQueens();
+    }
+}
+------------------------------------------------------------------------
+
+import java.util.*;
+
+public class TopologicalSorting {
+    private int V; // Number of vertices
+    private LinkedList<Integer> adj[]; // Adjacency List
+
+    // Constructor
+    TopologicalSorting(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
+    }
+
+    // Function to add an edge into the graph
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+    }
+
+    // A recursive function used by topologicalSort
+    void topologicalSortUtil(int v, boolean visited[], Stack<Integer> stack) {
+        // Mark the current node as visited
+        visited[v] = true;
+
+        // Recur for all the vertices adjacent to this vertex
+        Iterator<Integer> it = adj[v].iterator();
+        while (it.hasNext()) {
+            int i = it.next();
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack);
+        }
+
+        // Push current vertex to stack which stores result
+        stack.push(v);
+    }
+
+    // The function to do Topological Sort. It uses recursive
+    // topologicalSortUtil()
+    void topologicalSort() {
+        Stack<Integer> stack = new Stack<>();
+
+        // Mark all the vertices as not visited
+        boolean visited[] = new boolean[V];
+        for (int i = 0; i < V; i++)
+            visited[i] = false;
+
+        // Call the recursive helper function to store Topological
+        // Sort starting from all vertices one by one
+        for (int i = 0; i < V; i++)
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack);
+
+        // Print contents of stack
+        while (!stack.empty())
+            System.out.print(stack.pop() + " ");
+    }
+
+    public static void main(String args[]) {
+        // Create a graph given in the above diagram
+        TopologicalSorting g = new TopologicalSorting(6);
+        g.addEdge(5, 2);
+        g.addEdge(5, 0);
+        g.addEdge(4, 0);
+        g.addEdge(4, 1);
+        g.addEdge(2, 3);
+        g.addEdge(3, 1);
+
+        System.out.println("Topological sort:");
+        g.topologicalSort();
+    }
+}
+

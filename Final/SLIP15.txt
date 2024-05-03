@@ -1,0 +1,190 @@
+import java.util.*;
+
+public class GraphColoring {
+
+    static class Graph {
+        private int V; // Number of vertices
+        private LinkedList<Integer>[] adjList; // Adjacency list representation
+
+        // Constructor
+        Graph(int v) {
+            V = v;
+            adjList = new LinkedList[v];
+            for (int i = 0; i < v; ++i)
+                adjList[i] = new LinkedList();
+        }
+
+        // Function to add an edge into the graph
+        void addEdge(int v, int w) {
+            adjList[v].add(w); // Add w to v's list
+            adjList[w].add(v); // Add v to w's list
+        }
+
+        // Function to color the graph
+        void colorGraph() {
+            int[] result = new int[V]; // Stores the color assigned to each vertex
+            boolean[] available = new boolean[V]; // Stores the availability of colors
+
+            // Assign the first color to the first vertex
+            result[0] = 0;
+
+            // Initialize all colors as available
+            Arrays.fill(available, true);
+
+            // Assign colors to the remaining vertices
+            for (int u = 1; u < V; u++) {
+                // Process all adjacent vertices and flag their colors as unavailable
+                Iterator<Integer> iterator = adjList[u].iterator();
+                while (iterator.hasNext()) {
+                    int v = iterator.next();
+                    if (result[v] != -1) {
+                        available[result[v]] = false;
+                    }
+                }
+
+                // Find the first available color
+                int color;
+                for (color = 0; color < V; color++) {
+                    if (available[color]) {
+                        break;
+                    }
+                }
+
+                result[u] = color; // Assign the found color to the current vertex
+
+                // Reset the availability of colors for the next iteration
+                Arrays.fill(available, true);
+            }
+
+            // Print the result
+            System.out.println("Vertex   Color");
+            for (int u = 0; u < V; u++) {
+                System.out.println("  " + u + "      " + result[u]);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int V = 5; // Number of vertices
+        Graph g = new Graph(V);
+
+        // Add edges
+        g.addEdge(0, 1);
+        g.addEdge(0, 2);
+        g.addEdge(1, 2);
+        g.addEdge(1, 3);
+        g.addEdge(2, 3);
+        g.addEdge(3, 4);
+
+        System.out.println("Graph Coloring:");
+        g.colorGraph();
+    }
+}
+-------------------------------------------------------------------------------------------------
+
+
+
+import java.util.*;
+
+class Item {
+    int weight;
+    int value;
+    double cost;
+
+    public Item(int weight, int value) {
+        this.weight = weight;
+        this.value = value;
+        this.cost = (double)value / weight;
+    }
+}
+
+class Node {
+    int level;
+    int profit;
+    int weight;
+    double bound;
+
+    public Node(int level, int profit, int weight, double bound) {
+        this.level = level;
+        this.profit = profit;
+        this.weight = weight;
+        this.bound = bound;
+    }
+}
+
+public class KnapsackLCBB {
+
+    public static double bound(Node u, int n, int W, Item[] arr) {
+        if (u.weight >= W)
+            return 0;
+
+        double profitBound = u.profit;
+        int j = u.level + 1;
+        int totalWeight = u.weight;
+
+        while ((j < n) && (totalWeight + arr[j].weight <= W)) {
+            totalWeight += arr[j].weight;
+            profitBound += arr[j].value;
+            j++;
+        }
+
+        if (j < n)
+            profitBound += (W - totalWeight) * arr[j].cost;
+
+        return profitBound;
+    }
+
+    public static int knapsackLCBB(int W, Item[] arr, int n) {
+        Arrays.sort(arr, (a, b) -> Double.compare(b.cost, a.cost));
+
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingDouble(u -> -u.bound));
+
+        Node u = new Node(-1, 0, 0, 0);
+        pq.add(u);
+
+        int maxProfit = 0;
+
+        while (!pq.isEmpty()) {
+            u = pq.poll();
+
+            if (u.level == -1)
+                maxProfit = Math.max(maxProfit, u.profit);
+
+            if (u.level == n - 1)
+                continue;
+
+            Node v = new Node(u.level + 1,
+                    u.profit + arr[u.level + 1].value,
+                    u.weight + arr[u.level + 1].weight,
+                    bound(u, n, W, arr));
+
+            if (v.weight <= W && v.profit > maxProfit)
+                maxProfit = v.profit;
+
+            if (v.bound > maxProfit)
+                pq.add(v);
+
+            v = new Node(u.level + 1, u.profit, u.weight, bound(u, n, W, arr));
+
+            if (v.bound > maxProfit)
+                pq.add(v);
+        }
+        return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        int[] values = {60, 100, 120};
+        int[] weights = {10, 20, 30};
+        int W = 50;
+        int n = values.length;
+
+        Item[] arr = new Item[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = new Item(weights[i], values[i]);
+        }
+
+        int maxProfit = knapsackLCBB(W, arr, n);
+        System.out.println("Maximum profit: " + maxProfit);
+    }
+}
+

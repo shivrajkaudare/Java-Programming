@@ -1,0 +1,155 @@
+public class FourQueensProblem {
+    private static final int N = 4;
+
+    // Function to print the board configuration
+    private static void printBoard(int[][] board) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Function to solve the 4 Queens Problem
+    private static boolean solveNQueens(int[][] board, int col) {
+        // Base case: If all queens are placed, return true
+        if (col >= N)
+            return true;
+
+        // Try placing this queen in all rows one by one
+        for (int i = 0; i < N; i++) {
+            // Check if the queen can be placed on board[i][col]
+            if (isSafe(board, i, col)) {
+                // Place this queen in board[i][col]
+                board[i][col] = 1;
+
+                // Recur to place rest of the queens
+                if (solveNQueens(board, col + 1))
+                    return true;
+
+                // If placing queen in board[i][col] doesn't lead to a solution then remove the queen from board[i][col]
+                board[i][col] = 0; // BACKTRACK
+            }
+        }
+
+        // If the queen can't be placed in any row in this column col, then return false
+        return false;
+    }
+
+    // Function to check if a queen can be placed at the specified position
+    private static boolean isSafe(int[][] board, int row, int col) {
+        // Check if there's a queen in the same row
+        for (int i = 0; i < col; i++)
+            if (board[row][i] == 1)
+                return false;
+
+        // Check upper left diagonal
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            if (board[i][j] == 1)
+                return false;
+
+        // Check lower left diagonal
+        for (int i = row, j = col; j >= 0 && i < N; i++, j--)
+            if (board[i][j] == 1)
+                return false;
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[][] board = new int[N][N];
+
+        if (!solveNQueens(board, 0)) {
+            System.out.println("Solution does not exist");
+            return;
+        }
+
+        System.out.println("Board Configuration:");
+        printBoard(board);
+    }
+}
+--------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class HamiltonianCycle {
+    private int V;
+    private int[][] graph;
+
+    public HamiltonianCycle(int v) {
+        V = v;
+        graph = new int[V][V];
+    }
+
+    public void addEdge(int u, int v) {
+        graph[u][v] = 1;
+        graph[v][u] = 1;
+    }
+
+    public boolean isSafe(int v, int[] path, int pos) {
+        if (graph[path[pos - 1]][v] == 0)
+            return false;
+
+        for (int i = 0; i < pos; i++)
+            if (path[i] == v)
+                return false;
+
+        return true;
+    }
+
+    public boolean hamiltonianCycleUtil(int[] path, int pos) {
+        if (pos == V) {
+            if (graph[path[pos - 1]][path[0]] == 1)
+                return true;
+            else
+                return false;
+        }
+
+        for (int v = 1; v < V; v++) {
+            if (isSafe(v, path, pos)) {
+                path[pos] = v;
+
+                if (hamiltonianCycleUtil(path, pos + 1))
+                    return true;
+
+                path[pos] = -1;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean hamiltonianCycle() {
+        int[] path = new int[V];
+        Arrays.fill(path, -1);
+        path[0] = 0;
+
+        if (!hamiltonianCycleUtil(path, 1)) {
+            System.out.println("No Hamiltonian cycle exists");
+            return false;
+        }
+
+        System.out.println("Hamiltonian cycle exists:");
+        for (int i = 0; i < V; i++)
+            System.out.print(path[i] + " ");
+
+        System.out.println(path[0]);
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        HamiltonianCycle graph = new HamiltonianCycle(5);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 3);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 4);
+        graph.addEdge(3, 4);
+
+        graph.hamiltonianCycle();
+    }
+}
+
