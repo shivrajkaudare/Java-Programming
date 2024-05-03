@@ -1,0 +1,80 @@
+public class OptimalBinarySearchTree {
+
+    public static double optimalBST(double[] keys, double[] freq) {
+        int n = keys.length;
+        double[][] cost = new double[n + 1][n + 1];
+
+        for (int i = 0; i < n; i++) {
+            cost[i][i] = freq[i];
+        }
+
+        for (int length = 2; length <= n; length++) {
+            for (int i = 0; i <= n - length + 1; i++) {
+                int j = i + length - 1;
+                cost[i][j] = Double.MAX_VALUE;
+
+                double sum = getSum(freq, i, j);
+                for (int k = i; k <= j; k++) {
+                    double val = sum + (k > i ? cost[i][k - 1] : 0) + (k < j ? cost[k + 1][j] : 0);
+                    if (val < cost[i][j]) {
+                        cost[i][j] = val;
+                    }
+                }
+            }
+        }
+
+        return cost[0][n - 1];
+    }
+
+    private static double getSum(double[] freq, int i, int j) {
+        double sum = 0;
+        for (int k = i; k <= j; k++) {
+            sum += freq[k];
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        double[] keys = {10, 12, 20};
+        double[] freq = {34, 8, 50};
+
+        double minCost = optimalBST(keys, freq);
+        System.out.println("Minimum cost of optimal BST: " + minCost);
+    }
+}
+
+------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class SumOfSubset {
+
+    public static void findSubsetSum(int[] set, int target) {
+        List<Integer> subset = new ArrayList<>();
+        backtrack(set, target, 0, subset, 0);
+    }
+
+    private static void backtrack(int[] set, int target, int sum, List<Integer> subset, int start) {
+        if (sum == target) {
+            System.out.println("Subset found: " + subset);
+            return;
+        }
+
+        for (int i = start; i < set.length; i++) {
+            if (sum + set[i] <= target) {
+                subset.add(set[i]);
+                backtrack(set, target, sum + set[i], subset, i + 1);
+                subset.remove(subset.size() - 1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] set = {10, 7, 5, 18, 12, 20, 15};
+        int target = 35;
+
+        System.out.println("Subsets with sum equal to " + target + ":");
+        findSubsetSum(set, target);
+    }
+}
+
