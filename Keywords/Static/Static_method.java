@@ -1,24 +1,24 @@
 class Abcd
  {
-    intid;
-    Stringname;
-    static String company_name="Wipro";
+    int id;
+    String name;
+    static String company_name = "Wipro";
  static void display()
  {
     System.out.println("I am static method");
-    company_name="amdocs";
+    company_name = "amdocs";
  }
  Abcd(intid,Stringname)
  {
-    this.id=id;
-    this.name=name;
+    this.id = id;
+    this.name = name;
  }
 
  public void emp_details()
  {
-    System.out.println("Id="+id);
-    System.out.println("Name="+name);
-    System.out.println("Company name="+company_name);
+    System.out.println("Id = "+id);
+    System.out.println("Name = "+name);
+    System.out.println("Company name = "+company_name);
  }
  } 
 public class static_variable
