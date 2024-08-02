@@ -3,18 +3,18 @@
 // Java Interface also represents the IS-A relationship.
 //  By interface, we can support the functionality of multiple inheritance.
 
- interfacetest
- {
- voidpayment();
+ interface test {
+   void payment();
  }
- classsampleimplementstest
- {
- publicvoidpayment()
- {
- System.out.println(“Net banking");
+
+class sample implements test {
+ public void payment() {
+   System.out.println("Net banking");
  }
- publicstaticvoidmain(Stringargs[])
- {
- samples=newsample();
+}
+ public class Interface_Example {
+   public static void main(String args[]) {
+ sample s =new sample();
  s.payment();
  }
+}
