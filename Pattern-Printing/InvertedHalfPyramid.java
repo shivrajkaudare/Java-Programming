@@ -1,5 +1,10 @@
 package Pattern_Printing;
 
+// OutPut -  * * * *
+//           * * *
+//           * *
+//           *
+
 public class InvertedHalfPyramid {
     public static void main(String[] args) {
         
