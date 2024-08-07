@@ -5,11 +5,10 @@ package Pattern_Printing;
 //          1 2 3
 //          1 2 3 4
 //          1 2 3 4 5
-
-public class InvertedHalfPyramidWithNumbers {
+public class HalfPyramidWithNumbers {
 
 	public static void main(String[] args) {
-    
+		
 		int n = 5;
 		for(int i = 1; i <= n; i++) {
 		
@@ -21,4 +20,5 @@ public class InvertedHalfPyramidWithNumbers {
 		
 		}
 	}
+
 }
