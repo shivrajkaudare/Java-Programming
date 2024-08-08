@@ -8,12 +8,12 @@ import java.util.*;
 public class ArrayListEx {
   public static void main(String args []) {
 
-     ArrayList<String> li = new ArrayList<String>;
+     ArrayList<String> li = new ArrayList<String>();
             li.add("Shivraj");
             li.add("Nikeeta");
             li.add("Swapnil");
             li.add("Deepak");
-    System.out.println(list);
+    System.out.println(li);
     
   }
 }
