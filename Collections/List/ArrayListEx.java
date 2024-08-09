@@ -1,4 +1,4 @@
-// LinkedList :-
+// ArrayList :-
 // it can contain duplicate elements.
 // it maintain insertion order.
 // it allows random access because it works on index basis.
