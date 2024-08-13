@@ -25,7 +25,7 @@ public class DecrementingNumericPyramid {
                 System.out.print(0);
             }
             
-            // Handling the special case for the first number to print 10 instead of just 9
+            // Handling the case for the first number to print 10 instead of just 9
             if (i == 0) {
                 System.out.println(10);
             } else {
