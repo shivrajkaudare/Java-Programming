@@ -6,9 +6,9 @@
 
 import java.util.*;
 
-public class sample {  
+public class HashSetExample {  
   public static void main(String args[]) {  
-       HashSet <String> s = newHashSet(); 
+       HashSet <String> s = new HashSet(); 
          s.add("Liam");    
          s.add("Noah");    
          s.add("Oliver");   
