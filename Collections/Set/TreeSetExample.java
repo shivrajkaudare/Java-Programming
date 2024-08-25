@@ -8,7 +8,7 @@
 
 import java.util.*;
 
-public class sample { 
+public class TreeSetExample{ 
 
     public static void main(String args[]) { 
 
