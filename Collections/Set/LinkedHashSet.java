@@ -1,22 +1,29 @@
-// HashSet stores the elements by using a mechanism called hashing.
-// HashSet contains unique elements only.
-// HashSet allows null value.
-// HashSet doesn't maintain the insertion order.
-// HashSet is the best approach for search operations.import java.util.*;
+// LinkedHashSet implement both linkedlist as well as hashtable.
+// it maintain insertion order.
+// it allows null values.
+// it shows properties of both linkedlist and hashtable.
 
-public class HashSetExample { 
+import java.util.*;
 
-public static void main(String args[]) { 
+class LinkedHashSetExample{
+    public static void main(String[] args) {
+        LinkedHashSet <String> ls = new LinkedHashSet<String>();
 
-      HashSet<String> s=new HashSet(); 
-           s.add("Liam"); 
-           s.add("Noah"); 
-           s.add("Oliver"); 
-           s.add("Elijah");
-      Iterator<String> i=s.iterator(); 
-  while(i.hasNext()) { 
-     System.out.println(i.next()); 
-  } 
- } 
+            ls.add("abc");
+            ls.add("pqr");
+            ls.add("xyz");
+            ls.add("nqt");
 
-}
+          System.out.println(ls);
+
+          Iterator<String> itr = ls.iterator();
+
+        while(itr.hasNext()){
+            String el = itr.next();
+            System.out.println(el);
+        }
+
+                
+            }
+    }
+
