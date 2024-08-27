@@ -1,4 +1,3 @@
-package Collections;
 
 // LinkedList -
 // - it can Contain Duplicate elements.
@@ -8,7 +7,7 @@ package Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Linked_List {
+public class LinkedListEX{
 
 	public static void main(String[] args) {
 		
