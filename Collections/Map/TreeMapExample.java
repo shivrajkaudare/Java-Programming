@@ -3,8 +3,6 @@
 // TreeMap does not allow duplicate keys.
 //  it contain values along with keys.
 import java.util.*;
-
-
 public class TreeMapExample{
     public static void main(String[] args) {
         
