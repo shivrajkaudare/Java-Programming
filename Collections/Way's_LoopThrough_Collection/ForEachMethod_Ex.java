@@ -3,7 +3,7 @@ import java.util.*;
 // for Each method with lambda expression is used to loop through Collection's.
 // ex. list , map, set .
 
-public class IteratorEx {
+public class ForEachMethod_Ex {
       public static void main(String args[]){
 
           LinkedList<String> li = new LinkedList<String>();
@@ -15,6 +15,6 @@ public class IteratorEx {
         forEach(elements -> {
             System.out.println(elements);
           
-        )};
+      });
       }
 }

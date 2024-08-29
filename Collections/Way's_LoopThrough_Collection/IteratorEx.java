@@ -13,11 +13,12 @@ public class IteratorEx {
                   li.add("Shivraj");
 
         // Iterator for print list elements
-        Iterator<String> itr = li.Iterator();
+        Iterator<String> itr = li.iterator();
 
         while(itr.hasNext()) {
 
           System.out.println(itr.next());
       }
+}
 }
   

@@ -7,7 +7,7 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class LinkedListEX{
+public class LinkedListEx{
 
 	public static void main(String[] args) {
 		
