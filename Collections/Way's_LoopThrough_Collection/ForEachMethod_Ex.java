@@ -12,7 +12,7 @@ public class ForEachMethod_Ex {
                   li.add("Deepak");
                   li.add("Shivraj");
 
-        forEach(elements -> {
+        li.forEach(elements -> {
             System.out.println(elements);
           
       });
