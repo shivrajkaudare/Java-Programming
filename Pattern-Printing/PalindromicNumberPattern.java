@@ -10,7 +10,7 @@ public class PalindromicNumberPattern {
         for(int i = 1; i <= n; i++){
             // for loop for spaces.
             for(int j = 1; j<=n-i; j++){
-                System.out.print("");
+                System.out.print(" ");
             }
             // 1st half.
             for(int j = i; j >= 1; j--){
