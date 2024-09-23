@@ -1,7 +1,8 @@
-package Collections.Queue;
- import java.util.*;
 // Queue is a interface (Data Structure) that present in java.util package and it extends Collection interface.
 // Use FIFO(First In First Out) Algorithm for inserting and deleting element.
+
+package Collections.Queue;
+ import java.util.*;
 public class QueueEx {
     public static void main(String args[]){
       // LinkeddList Class is also implements Que interface
