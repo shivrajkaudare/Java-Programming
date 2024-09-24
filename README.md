@@ -4,4 +4,5 @@
 - Collections  <br>
 - Exception Handling  <br>
 - Multi-threading   <br>
-- JDBC 
+- JDBC <br>
+- Patterns Printing
