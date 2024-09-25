@@ -5,5 +5,5 @@
 - Exception Handling. <br>
 - Multi-threading.   <br>
 - JDBC.<br>
-- Patterns Printing.
-- Numbers Program.
+- Patterns Printing. <br>
+- Numbers Programs.
