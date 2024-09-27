@@ -20,7 +20,7 @@ public class QueueEx {
               System.out.println(elements);
            });
 
-            System.out.println(q1.peek());
+         
         
     }
     
