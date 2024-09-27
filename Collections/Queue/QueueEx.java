@@ -14,12 +14,13 @@ public class QueueEx {
            q1.add("kaudare");
 
            System.out.println(q1);
-
+          
 
           q1.forEach(elements ->{
               System.out.println(elements);
            });
 
+            System.out.println(q1.peek());
         
     }
     
