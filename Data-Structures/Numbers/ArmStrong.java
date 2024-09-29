@@ -1,7 +1,6 @@
-package Other_Programs;
 
 import java.util.*;
-public class Armstrong_Num {
+public class ArmStrong {
 
 	public static void main(String[] args) {
 		

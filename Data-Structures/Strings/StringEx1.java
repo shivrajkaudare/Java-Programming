@@ -4,7 +4,7 @@
 //                                         1) Using String literals.
 //                                         2) Using New Keyword.
 
-public Class StringEx1{
+public class StringEx1{
   public static void main(String args[]){
 
          // Using String literals. Using String literals memory is created is stack format.

@@ -1,8 +1,8 @@
-package Other_Programs;
+
 
 import java.util.Scanner;
 
-public class Palindrom {
+public class PalindromNum {
 
 	public static void main(String[] args) {
 		

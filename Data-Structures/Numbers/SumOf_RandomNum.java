@@ -1,8 +1,8 @@
-package Other_Programs;
+
 
 import java.util.Scanner;
 
-public class SumAvgOfNumbers {
+public class SumOf_RandomNum {
 
 	public static void main(String[] args) {
 		
