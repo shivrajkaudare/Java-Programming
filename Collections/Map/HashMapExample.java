@@ -1,3 +1,4 @@
+
 // HashMAp contains Values Based on Keys.
 // HashMap is Non-Synchronised i.e not thread Safe- Can not be share in multiple threads.
 // HashMap contain one null key and multiple null values.
