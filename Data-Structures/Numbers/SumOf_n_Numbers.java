@@ -1,5 +1,4 @@
 
-
 import java.util.Scanner;
 
 public class SumOf_n_Numbers {
