@@ -1,3 +1,4 @@
+package Collections.Deque;
 // Array Deque is more convinient way for implementing Queue interface than linked list.
 // can not contain null elements.
 // uses resizable array.

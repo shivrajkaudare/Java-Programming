@@ -1,4 +1,4 @@
-
+package Collections.List;
 // LinkedList -
 // - it can Contain Duplicate elements.
 // - sequential access, so it is slower to accessing the elements compare to ArrayList.

@@ -1,3 +1,6 @@
+package Collections.List;
+
+
 class Linkedlist{
 
     Node head;

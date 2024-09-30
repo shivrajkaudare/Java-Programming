@@ -1,3 +1,4 @@
+package Collections.Queue;
 // Priority Queue is used when the objects when the objects are supposed to be processed based on priority.
 // it does not permits null elements.
 // we can not create priority queue of elements.
