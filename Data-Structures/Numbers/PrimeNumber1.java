@@ -14,10 +14,11 @@ public class PrimeNumber1 {
         if (n <= 1) {
             System.out.println("Enter a number greater than 1");
         } else {
-            boolean prime = true;
+           
             
             // Loop to check for divisors up to the square root of n
             for (int i = 2; i <= n/2; i++) {
+                boolean prime = true;
                 if (n % i == 0) {
                     prime = false;
                     break;  // Exit the loop if a divisor is found
