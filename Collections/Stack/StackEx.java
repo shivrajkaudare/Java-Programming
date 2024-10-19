@@ -27,7 +27,7 @@ public class StackEx {
             System.out.println(i);
         }
         
-        // Pop- remove the element.
+        // Pop- remove the last / topmost element.
         s1.pop();
         System.out.println("Stack after removing top most element :");
         for(Integer i : s1){
