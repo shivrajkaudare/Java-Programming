@@ -1,5 +1,5 @@
 <h1>Java Programing</h1>
-- Data Structures and Algorithms.<br>
+- Data Structures and Algorithms (DSA).<br>
 - Object Oriented Programming(OPP'S).<br>
 - Collections.  <br>
 - Exception Handling. <br>
