@@ -26,7 +26,7 @@ public class SwappingTwoNumbers {
 		
 /***************************************************************************************/
 		
-		// Swapping without using 3rd variable
+		// Swapping of two numbers without using 3rd variable
 		
 		
 		Scanner sc = new Scanner(System.in);
