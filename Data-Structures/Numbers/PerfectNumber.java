@@ -1,6 +1,7 @@
 // A perfect number is a number that is equal to the sum of its proper divisors.
 //	Example: 6 = 1 + 2 + 3.
 
+
 import java.util.Scanner;
 
 public class PerfectNumber {
