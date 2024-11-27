@@ -26,7 +26,7 @@ public class PowerOfTwo {
         } else {
             System.out.println(number + " is NOT a Power of Two.");
         }
-
+        // close the Scannner.
         scanner.close();
     }
 }
