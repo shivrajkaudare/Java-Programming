@@ -1,3 +1,7 @@
+// Output -\
+// Smallest Element: -3
+// Largest Element: 10
+
 public class MinMaxInArray {
     public static void main(String[] args) {
         int[] arr = {3, 5, 1, 8, 2, -3, 7, 10};
