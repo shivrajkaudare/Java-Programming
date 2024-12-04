@@ -1,3 +1,4 @@
+// Output - Second Largest Element: 45
 // Java program to find second largest element in an array
 // using Sorting
 
