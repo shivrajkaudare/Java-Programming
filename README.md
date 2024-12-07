@@ -6,4 +6,5 @@
 - Multi-threading.   <br>
 - JDBC.<br>
 - Patterns Printing. <br>
-- Numbers Programs.
+- Numbers Programs. <br>
+- Java-8 Features.
