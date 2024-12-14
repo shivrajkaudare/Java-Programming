@@ -1,3 +1,8 @@
+// Output - 
+// Array1 and Array2 are equal: true
+// Array1 and Array3 are equal: false
+
+
 import java.util.Arrays;
 
 public class checkArraysEquality {
