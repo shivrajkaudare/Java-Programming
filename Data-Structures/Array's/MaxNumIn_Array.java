@@ -1,3 +1,5 @@
+// Maximum Number from given array.
+
 package Arrays;
 
 public class MaxNumInArray {
