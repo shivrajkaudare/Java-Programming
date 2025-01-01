@@ -1,3 +1,6 @@
+// blue print of an object
+// logical entity dont have state behaviour and identity.
+
 package JavaClass;
 
 class Student{
